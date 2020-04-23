@@ -1,7 +1,14 @@
 name: Build .NET Core Function App
 
 on:
-  [push]
+  push:
+    branches-ignore:
+      - 'master'
+    branches:
+      - '**'
+  pull_request:
+    branches:
+      - master
 
 jobs:
   build:
