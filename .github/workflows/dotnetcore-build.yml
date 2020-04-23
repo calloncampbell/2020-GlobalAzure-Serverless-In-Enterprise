@@ -1,35 +1,31 @@
-name: Build and deploy .NET Core Function App
+name: Build .NET Core Function App
 
 on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+  [push]
 
-env:
-  AZURE_FUNCTIONAPP_NAME_CONSUMPTION: ga2020-consumption-scale  # set this to your application's name
-  AZURE_FUNCTIONAPP_NAME_PREMIUM: ga2020-premium-scale  # set this to your application's name
-  AZURE_FUNCTIONAPP_PACKAGE_PATH: '.'    # set this to the path to your web app project, defaults to the repository root
-  DOTNET_VERSION: '3.1.101'              # set this to the dotnet version to use
-  
 jobs:
   build:
-    runs-on: windows-latest
-    steps:
-    - name: Checkout GitHub Action
-      uses: actions/checkout@vmaster
 
-    - name: Setup DotNet ${{ env.DOTNET_VERSION }} Environment
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout GitHub Action  
+      uses: actions/checkout@v2
+            
+    - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: ${{ env.DOTNET_VERSION }}
-
+        dotnet-version: 3.1.201        
+    
     - name: Install Dependencies
-      run: dotnet restore
-      
+      shell: pwsh
+      run: |
+        pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
+        dotnet build .\src\Scale-Latency-FunctionApp\Scale-Latency-FunctionApp.sln --configuration Release --output ./output
+        popd
+    
     - name: Build
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build .\src\Scale-Latency-FunctionApp\Scale-Latency-FunctionApp.sln --configuration Release --no-restore
     
     - name: Test
-      run: dotnet test --no-restore --verbosity normal
-    
+      run: dotnet test .\src\Scale-Latency-FunctionApp\Scale-Latency-FunctionApp.sln --no-restore --verbosity normal
