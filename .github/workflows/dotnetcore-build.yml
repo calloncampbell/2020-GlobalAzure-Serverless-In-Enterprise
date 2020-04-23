@@ -2,10 +2,9 @@ name: Build .NET Core Function App
 
 on:
   push:
-    branches-ignore:
-      - 'master'
     branches:
       - '**'
+      - '!master'
   pull_request:
     branches:
       - master
