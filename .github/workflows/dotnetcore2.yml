@@ -15,17 +15,10 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 3.1.101
-        
-    - name: Install dependencies
-      shell: pwsh
-      run: |
-        pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
-        dotnet build --configuration Release --output ./output
-        popd
+        dotnet-version: 3.1.201        
     
     - name: Build
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build .\src\Scale-Latency-FunctionApp\Scale-Latency-FunctionApp.sln --configuration Release --no-restore
     
     - name: Test
-      run: dotnet test --no-restore --verbosity normal
+      run: dotnet test .\src\Scale-Latency-FunctionApp\Scale-Latency-FunctionApp.sln --no-restore --verbosity normal
