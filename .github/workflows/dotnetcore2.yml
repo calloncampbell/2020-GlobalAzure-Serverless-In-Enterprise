@@ -17,6 +17,13 @@ jobs:
       with:
         dotnet-version: 3.1.201        
     
+    - name: Install Dependencies
+      shell: pwsh
+      run: |
+        pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
+        dotnet build .\src\Scale-Latency-FunctionApp\Scale-Latency-FunctionApp.sln --configuration Release --output ./output
+        popd
+    
     - name: Build
       run: dotnet build .\src\Scale-Latency-FunctionApp\Scale-Latency-FunctionApp.sln --configuration Release --no-restore
     
