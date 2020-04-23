@@ -1,0 +1,56 @@
+name: Build and deploy .NET Core Function App
+
+on:
+  push:
+    branches: [ master ]
+
+env:
+  AZURE_FUNCTIONAPP_NAME_CONSUMPTION: ga2020-consumption-scale  # set this to your application's name
+  AZURE_FUNCTIONAPP_NAME_PREMIUM: ga2020-premium-scale  # set this to your application's name
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: '.'    # set this to the path to your web app project, defaults to the repository root
+  DOTNET_VERSION: '3.1.201'              # set this to the dotnet version to use
+  
+jobs:
+  
+  build-and-deploy:
+    runs-on: windows-latest
+    
+    steps:
+    - name: Checkout GitHub Action
+      uses: actions/checkout@v2
+
+    - name: Setup DotNet ${{ env.DOTNET_VERSION }} Environment
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+
+    - name: Install Dependencies
+      shell: pwsh
+      run: |
+        pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
+        dotnet build .\src\Scale-Latency-FunctionApp\Scale-Latency-FunctionApp.sln --configuration Release --output ./output
+        popd
+      
+    - name: Build
+      run: dotnet build .\src\Scale-Latency-FunctionApp\Scale-Latency-FunctionApp.sln --configuration Release --no-restore
+    
+    - name: Test
+      run: dotnet test .\src\Scale-Latency-FunctionApp\Scale-Latency-FunctionApp.sln --no-restore --verbosity normal
+    
+    - name: Run Azure Functions Action
+      uses: Azure/functions-action@v1.1.4
+      with:
+        app-name: ${{ env.AZURE_FUNCTIONAPP_NAME_CONSUMPTION }}
+        package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
+        publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE_CONSUMPTION }}
+        
+    - name: Run Azure Functions Action
+      uses: Azure/functions-action@v1.1.4
+      with:
+        app-name: ${{ env.AZURE_FUNCTIONAPP_NAME_PREMIUM }}
+        package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
+        publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE_PREMIUM }}
+        
+        
+        
+
