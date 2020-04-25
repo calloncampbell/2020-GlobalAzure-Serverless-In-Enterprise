@@ -1,4 +1,4 @@
-name: Build .NET Core Function App
+name: Build .NET Core Function App 2
 
 on:
   push:

@@ -27,7 +27,7 @@ namespace GitHub_Actions_FunctionApp
 
             string responseMessage = string.IsNullOrEmpty(name)
                 ? "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response."
-                : $"Hello, {name} and welcome to Global Azure Virtual 2020 Canada Edition";
+                : $"Hello, {name} and welcome to Global Azure Virtual 2020!";
 
             return new OkObjectResult(responseMessage);
         }
