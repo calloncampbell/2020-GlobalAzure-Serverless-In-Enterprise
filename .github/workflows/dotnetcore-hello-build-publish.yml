@@ -1,4 +1,4 @@
-name: Build and deploy .NET Core Function App
+name: Build and deploy .NET Core Function App 1
 
 on:
   push:
