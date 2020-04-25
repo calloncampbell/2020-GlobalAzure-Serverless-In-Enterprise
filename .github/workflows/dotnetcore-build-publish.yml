@@ -37,20 +37,17 @@ jobs:
     - name: Test
       run: dotnet test .\src\Scale-Latency-FunctionApp\Scale-Latency-FunctionApp.sln --no-restore --verbosity normal
     
-    #- name: Run Azure Functions Action
-    #  uses: Azure/functions-action@v1.1.4
-    #  with:
-    #    app-name: ${{ env.AZURE_FUNCTIONAPP_NAME_CONSUMPTION }}
-    #    package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
-    #    publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE_CONSUMPTION }}
-    #    
-    #- name: Run Azure Functions Action
-    #  uses: Azure/functions-action@v1.1.4
-    #  with:
-    #    app-name: ${{ env.AZURE_FUNCTIONAPP_NAME_PREMIUM }}
-    #    package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
-    #    publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE_PREMIUM }}
+    - name: Run Azure Functions Action
+      uses: Azure/functions-action@v1.1.4
+      with:
+        app-name: ${{ env.AZURE_FUNCTIONAPP_NAME_CONSUMPTION }}
+        package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
+        publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE_CONSUMPTION }}
         
+    - name: Run Azure Functions Action
+      uses: Azure/functions-action@v1.1.4
+      with:
+        app-name: ${{ env.AZURE_FUNCTIONAPP_NAME_PREMIUM }}
+        package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
+        publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE_PREMIUM }}
         
-        
-
