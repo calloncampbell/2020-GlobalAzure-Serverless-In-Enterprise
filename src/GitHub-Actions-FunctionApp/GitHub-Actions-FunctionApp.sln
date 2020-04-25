@@ -3,14 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Scale-Latency-FunctionApp", "Scale-Latency-FunctionApp.csproj", "{0E877B1B-DC2B-4291-B680-566016A46741}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GitHub-Actions-FunctionApp", "GitHub-Actions-FunctionApp.csproj", "{0E877B1B-DC2B-4291-B680-566016A46741}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".GitHub", ".GitHub", "{3F443248-20F2-41CB-A9B9-C54A4E94F5CC}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".GitHub", ".GitHub", "{D28EC6AF-010A-4CD9-8E3C-52A3154AD999}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{F0DF1296-F9AE-45DE-B909-0E805AF16F79}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{8BFB9375-E5B1-4A7B-AD21-3FD4450E30C5}"
 	ProjectSection(SolutionItems) = preProject
-		..\..\.github\workflows\dotnetcore-build-publish.yml = ..\..\.github\workflows\dotnetcore-build-publish.yml
-		..\..\.github\workflows\dotnetcore-build.yml = ..\..\.github\workflows\dotnetcore-build.yml
+		..\..\.github\workflows\dotnetcore-hello-build-publish.yml = ..\..\.github\workflows\dotnetcore-hello-build-publish.yml
+		..\..\.github\workflows\dotnetcore-hello-build.yml = ..\..\.github\workflows\dotnetcore-hello-build.yml
 	EndProjectSection
 EndProject
 Global
@@ -28,7 +28,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{F0DF1296-F9AE-45DE-B909-0E805AF16F79} = {3F443248-20F2-41CB-A9B9-C54A4E94F5CC}
+		{8BFB9375-E5B1-4A7B-AD21-3FD4450E30C5} = {D28EC6AF-010A-4CD9-8E3C-52A3154AD999}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {383372D2-932B-4820-BE8E-732AC7E6AD2C}
